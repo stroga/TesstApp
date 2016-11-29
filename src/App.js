@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
-
+import { airportsStore } from './stores/airportsStore';
 
 import { SearchResult } from './components/searchReasultList';
 import { ActionsForm } from './actionsForm';
-import { airportsStore } from './stores/airportsStore';
 import { DatePickerRange } from './components/datePicker'
 import { debounce } from 'lodash';
 import 'react-datepicker/dist/react-datepicker.css';
@@ -64,7 +63,12 @@ class App extends Component {
 
     var errors = [];
     var data = {};
-        
+    var inputs = [].slice.call(e.target.getElementsByTagName('input'));
+    inputs.map(input => {
+      data[input.name] = input.value;
+      
+    });
+
     if ( !!errors.length ) {
       //ADD ERROR HANDLER!!!!!!
       console.log( errors );
