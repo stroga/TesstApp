@@ -3,32 +3,34 @@ import DatePicker from 'react-datepicker';
 import moment from 'moment';
 
 
+
+var CustomInput = React.createClass({
+
+  render() {
+    return (
+      <input readOnly="readonly" 
+            className={"custom_input " + this.props.name}
+            name={this.props.name}
+            onClick={this.props.onClick} 
+            value={this.props.value}/>
+    );
+  }
+});
+
 class DatePickerRange extends Component {
   constructor(props) {
     super( props );
-    this.handleChangeStart = this.handleChangeStart.bind(this);
-    this.handleChangeEnd = this.handleChangeEnd.bind(this);
     this.state = {
       startDate: moment(),
       endDate: moment().day(3)
     };
   }
 
-  handleChangeStart(date){
-    console.log( "changed START date" );
+  handleChange(dateType,date){
     this.setState({
-      startDate: date
+      [dateType]: date
     });
   }
-
-
-  handleChangeEnd(date){
-    console.log( "changed END date" );
-   	 this.setState({
-      endDate: date
-    }); 
-  }
-
 
   render() {
     return (
@@ -39,15 +41,20 @@ class DatePickerRange extends Component {
           selected={this.state.startDate}
           selectsStart  startDate={this.state.startDate}
           endDate={this.state.endDate}
-          onChange={this.handleChangeStart} 
+          onChange={this.handleChange.bind(this, "startDate")} 
           dateFormat="MM-DD-YYYY"
-          name="travel_date_start" />
+          customInput={<CustomInput />}
+          name="travel_date_start"
+        />
+          
+
         <DatePicker
           selected={this.state.endDate}
           selectsEnd  startDate={this.state.startDate}
           endDate={this.state.endDate}
-          onChange={this.handleChangeEnd} 
+          onChange={this.handleChange.bind(this, "endDate")} 
           dateFormat="MM-DD-YYYY"
+          customInput={<CustomInput />}
           name="travel_date_end"/>
       </div>
     );

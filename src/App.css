@@ -1,3 +1,7 @@
+body {
+  counter-reset: item;
+}
+
 .departure ul,
 .destination ul {
   background: red;
@@ -12,8 +16,13 @@
 }
 
 .travel_form {
-  font-family: 'Roboto', serif;
+  
   padding: 15px;
+  
+ }
+
+ .travel_form * {
+    font-family: 'Roboto', serif !important;
  }
 
 .travel_form form {
@@ -22,6 +31,7 @@
   margin: 0 auto;
   padding: 10px;
   padding-top: 0;
+  text-align: right;
 
   background-image: linear-gradient(to top,#16165C,#922B86);
   border: 2px solid #16165C;
@@ -30,6 +40,7 @@
 .travel_form label {
   width: 300px;
   display: inline-block;
+  text-align: left;
   /*display: flex;
   align-items: center;*/
 }
@@ -86,6 +97,10 @@ label[for=destination] {
   padding-top: 15px;
 }
 
+label[for=departure] {
+  float: left;
+}
+
 label[for=destination] {
   float: right;
 }
@@ -97,7 +112,10 @@ label[for=destination] {
 
   label[for=destination] {
     float: none;
+    clear: both;
+    padding-top: 0;
     display: block;
+
   }
 }
 
@@ -147,8 +165,8 @@ label[for=destination]>span,
 }
 
 .datepicker_wrapper {
-  padding-top: 15px;
   width: 100%;
+  text-align: left;
 }
 
 .react-datepicker__day--selected, 
@@ -161,7 +179,7 @@ label[for=destination]>span,
   width: calc(50% - 10px);
 }
 
-.datepicker_wrapper input {
+.datepicker_wrapper .custom_input {
   line-height: 34px;
   border-radius: 4px;
   background-color: #fff;
@@ -175,6 +193,9 @@ label[for=destination]>span,
   height: 32px;
   outline: none;
   padding-left: 10px;
+  width: calc(100% - 13px);
+  color: #073590 !important;
+  font-weight: bold !important;
 }
 
 .Select-clear-zone {
@@ -216,7 +237,7 @@ label[for=destination]>span,
 .plane_to {
   height: 30px;
   width: 30px;
-  transform: rotate(20deg);
+  transform: rotate(0deg);
 }
 
 .submit_search {
@@ -227,7 +248,7 @@ label[for=destination]>span,
   border-radius: 4px;
   font-size: 18px;
   color: #5f2274;
-  margin-top: 15px;
+  margin-top: 30px;
   -webkit-transition: all 0.7s ease;
   transition: all 0.7s ease;
   width: 115px;
@@ -254,13 +275,85 @@ label[for=destination]>span,
 }
 
 .search_item {
-  color: #fff;
-  background: #16165C; 
-  border: 2px solid #16165C; 
+  color: #cccccc;
+  background: #fff; 
+  border-radius: 4px;
+  border: 1px solid #ccc;
   margin-top: 5px;
 }
 
 .header_line {
   display: flex;
+  padding: 0 15px;
   justify-content: space-between;
+  border-bottom: 1px solid #ccc;
+  line-height: 34px;
+  background: rgba(88, 4, 123, 0.1);
+}
+
+
+
+.dep_info,
+.dest_info {
+  color: #000000;
+}
+
+.price_info {
+  color: #460440;
+  font-size: 20px;
+  text-align: center;
+}
+
+
+.result_content {
+  padding: 10px 15px;
+  display: flex;
+  justify-content: space-between;
+}
+
+/*.result_content>div {
+  display: inline-block;
+}*/
+.result_duration {
+  color: #000000;
+}
+
+.result_time,
+.result_date {
+  color: #2E2E2E;
+  font-weight: 700;
+  font-size: 18px;
+}
+
+.book_flight {
+  cursor: pointer;
+  display: block;
+  padding: 10px 20px;
+  background: rgb(239, 239, 248);
+  border: 0;
+  border-radius: 4px;
+}
+
+
+
+.search_item {
+  animation-delay: item+"s";
+  counter-increment: item;
+  animation: pulse .5s 1;
+
+}
+
+@keyframes pulse {
+  0% {
+    /*transform: translateX(900px);*/
+    opacity: 0;
+    transform: rotateX(-90deg);
+  }
+  100% {
+    /* transform: translateX(0px);
+    animation-fill-mode: forwards; */
+    opacity: 1;
+    transform: none;
+    transition: all 0.5s cubic-bezier(.36,-0.64,.34,1.76);
+  }
 }
